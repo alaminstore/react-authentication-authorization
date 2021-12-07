@@ -4,24 +4,61 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Navbar />
+import React, { Component } from "react";
+import axios from "axios";
 
-        <div className="auth-wrapper">
-          <div className="auth-inner">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
-            </Switch>
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
+  componentDidMount = async () => {
+    await axios.get("/user").then(
+      (res) => {
+        this.setUser(res.data);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  };
+  setUser = (user) => {
+    this.setState({
+      user: user,
+    });
+  };
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Navbar user={this.state.user} setUser={this.setUser} />
+
+          <div className="auth-wrapper">
+            <div className="auth-inner">
+              <Switch>
+                {/* <Route
+                  exact
+                  path="/"
+                  component={() => <Home user={this.state.user} />}
+                /> */}
+                <Route
+                  exact
+                  path="/"
+                  render={(props) => <Home {...props} user={this.state.user} />}
+                />
+                <Route
+                  exact
+                  path="/login"
+                  component={() => <Login setUser={this.setUser} />}
+                />
+                <Route exact path="/register" component={Register} />
+              </Switch>
+            </div>
           </div>
         </div>
-      </div>
-    </Router>
-  );
+      </Router>
+    );
+  }
 }
 
 export default App;
