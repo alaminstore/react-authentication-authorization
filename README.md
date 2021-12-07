@@ -1,6 +1,6 @@
 ## Available Scripts
 
-For Back End Api: [Api Code](https://github.com/alaminstore/authentication-api).
+For Back End Api: [Authentication-Api](https://github.com/alaminstore/authentication-api).
 
 
 
