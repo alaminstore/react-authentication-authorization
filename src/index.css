@@ -1,3 +1,14 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+label {
+  font-weight: 400;
+  font-family: "Fira Sans", sans-serif;
+}
 .navbar-expand .navbar-collapse {
   display: flex !important;
   flex-basis: auto;
@@ -18,6 +29,17 @@
   border-radius: 15px;
   transition: all 0.3s;
 }
+.forgot-password,
+.forgot-password a {
+  text-align: center;
+  font-size: 13px;
+  padding-top: 10px;
+  color: #7f7d7d;
+  margin: 0;
+}
+.forgot-password a {
+  color: #167bff;
+}
 /*
 * {
   box-sizing: border-box;
@@ -29,17 +51,7 @@ body {
   font-weight: 400;
   font-family: "Fira Sans", sans-serif;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-span,
-label {
-  font-weight: 400;
-  font-family: "Fira Sans", sans-serif;
-}
+
 
 body,
 html,
@@ -67,6 +79,4 @@ html,
   color: #7f7d7d;
   margin: 0;
 }
-.forgot-password a {
-  color: #167bff;
-} */
+ */

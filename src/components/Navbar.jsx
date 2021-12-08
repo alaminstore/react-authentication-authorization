@@ -5,7 +5,6 @@ export default class Navbar extends Component {
   handleLogout = () => {
     localStorage.clear();
     this.props.setUser(null);
-    console.log("out", this.props);
   };
   render() {
     let Buttons;

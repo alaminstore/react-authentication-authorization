@@ -6,6 +6,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import React, { Component } from "react";
 import axios from "axios";
+import Forgot from "./components/forgot";
+import Reset from "./components/Reset";
 
 class App extends Component {
   constructor() {
@@ -52,6 +54,8 @@ class App extends Component {
                   component={() => <Login setUser={this.setUser} />}
                 />
                 <Route exact path="/register" component={Register} />
+                <Route exact path="/forgot" component={Forgot} />
+                <Route exact path="/reset/:id" component={Reset} />
               </Switch>
             </div>
           </div>

@@ -7,6 +7,7 @@ import {
 import axios from "axios";
 
 export default class Register extends Component {
+  state = {};
   handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
@@ -16,36 +17,36 @@ export default class Register extends Component {
       password: this.password,
       password_confirm: this.confirmPassword,
     };
-    if (data.first_name.length < 1 || data.last_name === "") {
-      NotificationManager.warning(
-        "Warning message",
-        "Field must not be empty!"
-      );
-      alert("Field must not be empty!");
-      return;
-    } else {
-      const response = await axios
-        .post("/register", data)
-        .then((res) => {
-          console.log(res);
-          document.getElementById("cform").reset();
-          NotificationManager.success(
-            "Success message",
-            "Registration success!"
-          );
-        })
-        .catch((err) => {
-          console.log(err);
+
+    const response = await axios
+      .post("/register", data)
+      .then((res) => {
+        console.log(res);
+        document.getElementById("cform").reset();
+        NotificationManager.success("Success message", "Registration success!");
+      })
+      .catch((err) => {
+        this.setState({
+          warning: err.response.data.message,
         });
-    }
+      });
   };
 
   render() {
+    let error = "";
+    if (this.state.warning) {
+      error = (
+        <div className="alert alert-danger role=" alert>
+          {this.state.warning}
+        </div>
+      );
+    }
     return (
       <>
         <h3>Register Here...</h3>
         <br />
         <form onSubmit={this.handleSubmit} id="cform">
+          <div className="text-center">{error}</div>
           <div className="form-group">
             <label htmlFor="firstname">First Name:</label>
             <input
