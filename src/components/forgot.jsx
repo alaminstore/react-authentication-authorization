@@ -10,19 +10,36 @@ class Forgot extends Component {
     axios
       .post("/forgot", data)
       .then((res) => {
-        console.log(res);
+        console.log("ss", res);
+        if (res.data.message) {
+          this.setState({
+            success: res.data.message,
+          });
+        } else if (res.data.error) {
+          this.setState({
+            warning: res.data.error,
+          });
+        }
+        document.getElementById("forgotForm").reset();
       })
       .catch((err) => {
-        this.setState({
-          warning: err.response.data.message,
-        });
+        console.log(err);
+        // this.setState({
+        //   warning: err.data.message,
+        // });
       });
   };
   render() {
     let error = "";
-    if (this.state.warning) {
+    if (this.state.success) {
       error = (
-        <div className="alert alert-danger role=" alert>
+        <div className="alert alert-success" role="alert">
+          {this.state.success}
+        </div>
+      );
+    } else if (this.state.warning) {
+      error = (
+        <div className="alert alert-danger" role="alert">
           {this.state.warning}
         </div>
       );
@@ -30,7 +47,7 @@ class Forgot extends Component {
     return (
       <>
         <h2 className="text-center">Forgot Password</h2>
-        <form onSubmit={this.handleSubmit} id="loginForm">
+        <form onSubmit={this.handleSubmit} id="forgotForm">
           <div className="text-center">{error}</div>
           <div className="form-group">
             <label htmlFor="email">Email:</label>

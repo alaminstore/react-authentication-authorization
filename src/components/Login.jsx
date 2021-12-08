@@ -36,7 +36,7 @@ export default class Login extends Component {
     let error = "";
     if (this.state.warning) {
       error = (
-        <div className="alert alert-danger role=" alert>
+        <div className="alert alert-danger" role="alert">
           {this.state.warning}
         </div>
       );
